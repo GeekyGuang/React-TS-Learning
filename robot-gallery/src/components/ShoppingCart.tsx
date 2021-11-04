@@ -16,15 +16,16 @@ export class ShoppingCart extends React.Component<Props, State> {
     }
   }
 
+  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if ((e.target as HTMLElement).nodeName === 'SPAN') {
+      this.setState({ isOpen: !this.state.isOpen })
+    }
+  }
+
   render() {
     return (
       <div className={styles.cartContainer}>
-        <button
-          className={styles.button}
-          onClick={() => {
-            this.setState({ isOpen: !this.state.isOpen })
-          }}
-        >
+        <button className={styles.button} onClick={this.handleClick}>
           <FiShoppingCart />
           <span>购物车(2件)</span>
         </button>
