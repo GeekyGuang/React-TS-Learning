@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Robot from './components/Robot'
 import styles from './App.module.css'
 import logo from './assets/images/logo.svg'
@@ -11,54 +11,30 @@ interface State {
   count: number
 }
 
-class App extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      robotGallery: [],
-      count: 0,
-    }
-  }
+const App: React.FC = (props) => {
+  const [count, setCount] = useState(0)
 
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ robotGallery: data })
-      })
-  }
-
-  render() {
-    return (
-      <div className={styles.app}>
-        <div className={styles.appHeader}>
-          <img src={logo} className={styles.appLogo} alt="logo" />
-          <h1>罗伯特机器人炫酷吊炸天online购物平台的名字要长</h1>
-        </div>
-        <button
-          onClick={() => {
-            this.setState((preState, preProps) => {
-              return { count: preState.count + 1 }
-            })
-            this.setState((preState, preProps) => {
-              return { count: preState.count + 1 }
-            })
-            this.setState((preState, preProps) => {
-              return { count: preState.count + 1 }
-            })
-          }}
-        >
-          {this.state.count}
-        </button>
-        <ShoppingCart />
+  return (
+    <div className={styles.app}>
+      <div className={styles.appHeader}>
+        <img src={logo} className={styles.appLogo} alt="logo" />
+        <h1>罗伯特机器人炫酷吊炸天online购物平台的名字要长</h1>
+      </div>
+      <button
+        onClick={() => {
+          setCount(count + 1)
+        }}
+      >
+        {count}
+      </button>
+      {/* <ShoppingCart />
         <div className={styles.robotList}>
           {this.state.robotGallery.map((r) => (
             <Robot id={r.id} name={r.name} email={r.email} />
           ))}
-        </div>
-      </div>
-    )
-  }
+        </div> */}
+    </div>
+  )
 }
 
 export default App
