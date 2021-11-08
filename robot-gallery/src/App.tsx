@@ -15,12 +15,20 @@ const App: React.FC = (props) => {
   const [count, setCount] = useState(0)
   const [robotGallery, setRobotGallery] = useState<any>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState('')
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      const response = await fetch('https://jsonplaceholder.typicode.com/users')
-      const data = await response.json()
-      setRobotGallery(data)
+      try {
+        const response = await fetch(
+          'https://jsonplaceholder.typicode.com/users'
+        )
+        const data = await response.json()
+        setRobotGallery(data)
+      } catch (e: any) {
+        setErrorMsg(e.message)
+      }
+
       setLoading(false)
     }
 
@@ -41,6 +49,7 @@ const App: React.FC = (props) => {
         {count}
       </button>
       <ShoppingCart />
+      {(!errorMsg || errorMsg !== '') && <div>{errorMsg}</div>}
       {!loading ? (
         <div className={styles.robotList}>
           {robotGallery.map((r: any) => (
