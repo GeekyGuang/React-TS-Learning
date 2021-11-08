@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Robot from './components/Robot'
 import styles from './App.module.css'
 import logo from './assets/images/logo.svg'
@@ -13,6 +13,12 @@ interface State {
 
 const App: React.FC = (props) => {
   const [count, setCount] = useState(0)
+  const [robotGallery, setRobotGallery] = useState<any>([])
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response) => response.json())
+      .then((data) => setRobotGallery(data))
+  }, [])
 
   return (
     <div className={styles.app}>
@@ -27,12 +33,12 @@ const App: React.FC = (props) => {
       >
         {count}
       </button>
-      {/* <ShoppingCart />
-        <div className={styles.robotList}>
-          {this.state.robotGallery.map((r) => (
-            <Robot id={r.id} name={r.name} email={r.email} />
-          ))}
-        </div> */}
+      <ShoppingCart />
+      <div className={styles.robotList}>
+        {robotGallery.map((r: any) => (
+          <Robot id={r.id} name={r.name} email={r.email} />
+        ))}
+      </div>
     </div>
   )
 }
