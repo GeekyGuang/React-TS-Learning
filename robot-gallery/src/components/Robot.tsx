@@ -1,5 +1,6 @@
 import styles from './Robot.module.css'
 import { appContext } from '../index'
+import { useContext } from 'react'
 
 interface RobotProp {
   id: number
@@ -8,17 +9,14 @@ interface RobotProp {
 }
 
 const Robot: React.FC<RobotProp> = ({ id, name, email }) => {
+  const user = useContext(appContext)
   return (
-    <appContext.Consumer>
-      {(value) => (
-        <div className={styles.cardContainer}>
-          <img src={`https://robohash.org/${id}`} alt="robot" />
-          <h2>{name}</h2>
-          <p>{email}</p>
-          <p>作者：{value.name}</p>
-        </div>
-      )}
-    </appContext.Consumer>
+    <div className={styles.cardContainer}>
+      <img src={`https://robohash.org/${id}`} alt="robot" />
+      <h2>{name}</h2>
+      <p>{email}</p>
+      <p>作者：{user.name}</p>
+    </div>
   )
 }
 
