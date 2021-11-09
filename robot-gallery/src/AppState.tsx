@@ -10,7 +10,7 @@ const defaultContextValue: DefaultContextValue = {
   shoppingCartItems: [],
 }
 
-interface StateContext {
+export interface StateContext {
   state: DefaultContextValue
   setState:
     | React.Dispatch<React.SetStateAction<DefaultContextValue>>
