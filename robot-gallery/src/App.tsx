@@ -5,13 +5,6 @@ import styles from './App.module.css'
 import logo from './assets/images/logo.svg'
 import { ShoppingCart } from './components/ShoppingCart'
 
-interface Props {}
-
-interface State {
-  robotGallery: any[]
-  count: number
-}
-
 const App: React.FC = (props) => {
   const [count, setCount] = useState(0)
   const [robotGallery, setRobotGallery] = useState<any>([])

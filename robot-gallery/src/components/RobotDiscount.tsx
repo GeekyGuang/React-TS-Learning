@@ -1,14 +1,10 @@
 import styles from './Robot.module.css'
 import { RobotProp } from './Robot'
-import { withAddToCart } from './AddToCart'
+import { useAddToCart } from './AddToCart'
 
-const RobotDiscount: React.FC<RobotProp> = ({
-  id,
-  name,
-  email,
-  store,
-  addToCart,
-}) => {
+const RobotDiscount: React.FC<RobotProp> = ({ id, name, email }) => {
+  const { store, addToCart } = useAddToCart()
+
   return (
     <div className={styles.cardContainer}>
       <img src={`https://robohash.org/${id}`} alt="robot" />
@@ -21,4 +17,4 @@ const RobotDiscount: React.FC<RobotProp> = ({
   )
 }
 
-export default withAddToCart(RobotDiscount)
+export default RobotDiscount
